@@ -12,6 +12,7 @@ export class Gameboard {
   board = Array.from({ length: 10 }, () => new Array(10).fill(null));
 
   placeShip(type, x, y) {
+    if (this.board[x][y] === null && (y.length -1) - y >= type.length)
     for (let i = 0; i <= type.length - 1; i++) {
       this.board[x][y + i] = type;
     }
