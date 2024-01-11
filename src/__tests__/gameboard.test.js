@@ -24,4 +24,22 @@ describe('Gameboard functions tests', () => {
        expect(testBoard.board[1][6]).toBe(testBoard.battleship)
        expect(testBoard.board[2][4]).toBe(testBoard.submarine)
     })
+    test('Gameboard hits based on coordinates and array changes', () =>{
+        testBoard.receiveAttack(0, 2)
+        expect(testBoard.board[0][2]).toBe("miss")
+    })
+    test('When a ship is hit, change its hitIndex', () => {
+        testBoard.placeShip(testBoard.carrier, 0, 2);
+        testBoard.receiveAttack(0, 3);
+        testBoard.receiveAttack(0, 4);
+        expect(testBoard.board[0][2].hitIndex).toBe(2)
+        expect(testBoard.board[0][3]).toBe("hit")
+        expect(testBoard.carrier.hitIndex).toBe(2);
+    })
+    test('When a ship is hit enough times, it changes to sunk', () =>{
+        testBoard.placeShip(testBoard.patrolBoat, 1,1);
+        testBoard.receiveAttack(1,1);
+        testBoard.receiveAttack(1,2);
+        expect(testBoard.patrolBoat.sunk).toBe(true);
+    })
 })
