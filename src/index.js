@@ -1,8 +1,8 @@
 import { Player } from "./player";
 import { Gameboard } from "./gameBoard";
 import { generateBoard } from "./dom";
-const player1 = new Player();
-const player2 = new Player();
+export const player1 = new Player("player1");
+export const player2 = new Player("player2");
 
 player1.board.placeShip(player1.board.carrier, 0, 0);
 player1.board.placeShip(player1.board.battleship, 1, 0);

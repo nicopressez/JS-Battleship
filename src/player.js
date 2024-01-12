@@ -1,7 +1,8 @@
 import { Gameboard } from "./gameBoard";
 
 export class Player {
-  constructor() {
+  constructor(name) {
+    this.name = name;
     this.board = new Gameboard();
   }
   playTurn(otherPlayer, x, y) {
