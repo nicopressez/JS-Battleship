@@ -39,8 +39,8 @@ gridContainer.classList.add(player.name)
               }
           
               player1.playTurn(player2, x, y);
-
-              computerPlays();
+// Computer will play after 3s
+              setTimeout(() => computerPlays() ,300) 
             }
             
                 ,{ once: true })
@@ -49,7 +49,17 @@ gridContainer.classList.add(player.name)
     
     const computerPlays = () => {
         const attackedCoord = player2.randomTurn(player1);
-        console.log(attackedCoord)
-        const player1Container = document.getElementsByClassName(".player1");
-        const attackedCell = player1Container[0].getElementsByClassName(`.${attackedCoord}`);
+        const player1Container = document.getElementsByClassName("player1");
+        const attackedCell = player1Container[0].getElementsByClassName(`${attackedCoord}`);
+
+        const x = attackedCoord.charAt(0);
+        const y = attackedCoord.charAt(1);
+ 
+        // Update the cell that was attacked on player's grid
+        if (player1.board.board[x][y] === "hit") {
+            attackedCell[0].classList.add("ship");
+          } else {
+            attackedCell[0].classList.add("miss");
+          }
+
     }
