@@ -24,3 +24,7 @@
 .gridContainer .ship{
     background-color: red;
 }
+
+.gridContainer .miss{
+    background-color: gray;
+}

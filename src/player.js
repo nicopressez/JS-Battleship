@@ -19,7 +19,8 @@ export class Player {
       otherPlayer.board.board[x][y] !== "hit"
     ) {
       this.playTurn(otherPlayer, x, y);
-    } else this.randomTurn(otherPlayer);
+      return `${x}${y}`;
+    } else return this.randomTurn(otherPlayer);
   }
 }
 

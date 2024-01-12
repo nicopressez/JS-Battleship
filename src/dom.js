@@ -1,7 +1,7 @@
 import { GameBoard } from "./gameBoard";
 import { Player } from "./player";
 import { Ship } from "./ships";
-import { player1, player2 } from ".";
+import { player1, player2 } from "./index";
 
 export const generateBoard = (player) =>  {
     
@@ -18,28 +18,38 @@ gridContainer.classList.add(player.name)
         for (let y = 0; y <= 9; y++) {
             const cell = document.createElement("div");
             cell.classList.add(`${x}${y}`);
-            if (player.board.board[x][y] === null) {
-              } else {
-              }
-              gridContainer.appendChild(cell);
-              attackListener(cell, player);
+            gridContainer.appendChild(cell);
+
+              // Add event listener only to the computer's grid
+
+              if (player.name === "player2")attackListener(cell);
             }
     }
     }
 
-    const attackListener = (cell, player) => {
-        let otherPlayer;
-        if (player.name === "player1") otherPlayer = player2;
-        else otherPlayer = player1;
-
-        cell.addEventListener('click', (e) => {
-            player.playTurn(player, Number(cell.getAttribute('class').charAt(0)), Number(cell.getAttribute('class').charAt(1)));
-
+    const attackListener = (cell) => {
+        cell.addEventListener('click', () => {
+            const x = Number(cell.getAttribute('class').charAt(0));
+            const y = Number(cell.getAttribute('class').charAt(1));
             // If this is a ship, add class "ship" to the grid
-            if (otherPlayer.board.board[Number(cell.getAttribute('class').charAt(0))]
-                [Number(cell.getAttribute('class').charAt(1))] !== null) {
-                    cell.classList.add("ship");
-                }
-                else cell.classList.add("miss");})
-            // Otherwise, add "miss"
+            if (player2.board.board[x][y] !== null) {
+                cell.classList.add("ship");
+              } else {
+                cell.classList.add("miss");
+              }
+          
+              player1.playTurn(player2, x, y);
+
+              computerPlays();
+            }
+            
+                ,{ once: true })
+    }
+
+    
+    const computerPlays = () => {
+        const attackedCoord = player2.randomTurn(player1);
+        console.log(attackedCoord)
+        const player1Container = document.getElementsByClassName(".player1");
+        const attackedCell = player1Container[0].getElementsByClassName(`.${attackedCoord}`);
     }
