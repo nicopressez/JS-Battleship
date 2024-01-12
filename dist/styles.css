@@ -28,3 +28,7 @@
 .gridContainer .miss {
   background-color: gray;
 }
+
+.gridContainer .isHit{
+    background-color: brown;
+}

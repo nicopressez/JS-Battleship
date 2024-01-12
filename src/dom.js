@@ -3,6 +3,7 @@ import { Player } from "./player";
 import { Ship } from "./ships";
 import { player1, player2 } from "./index";
 
+let isPlayerTurn = true
 export const generateBoard = (player) => {
   // Generate 10x10 grid
   const body = document.querySelector("body");
@@ -18,6 +19,11 @@ export const generateBoard = (player) => {
       cell.classList.add(`${x}${y}`);
       gridContainer.appendChild(cell);
 
+      if (player.name === "player1") {
+        if (player1.board.board[x][y] !== null) 
+        cell.classList.add("ship");
+      }
+
       // Add event listener only to the computer's grid
 
       if (player.name === "player2") attackListener(cell);
@@ -29,6 +35,9 @@ const attackListener = (cell) => {
   cell.addEventListener(
     "click",
     () => {
+        
+        if (!isPlayerTurn) return;
+
       const x = Number(cell.getAttribute("class").charAt(0));
       const y = Number(cell.getAttribute("class").charAt(1));
       // If this is a ship, add class "ship" to the grid
@@ -39,8 +48,12 @@ const attackListener = (cell) => {
       }
 
       player1.playTurn(player2, x, y);
+      isPlayerTurn = false;
       // Computer will play after 3s
-      setTimeout(() => computerPlays(), 300);
+      setTimeout(() => {
+        computerPlays()
+        isPlayerTurn = true;}, 
+        300);
     },
 
     { once: true },
@@ -59,7 +72,7 @@ const computerPlays = () => {
 
   // Update the cell that was attacked on player's grid
   if (player1.board.board[x][y] === "hit") {
-    attackedCell[0].classList.add("ship");
+    attackedCell[0].classList.add("isHit");
   } else {
     attackedCell[0].classList.add("miss");
   }
