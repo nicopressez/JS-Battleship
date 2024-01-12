@@ -1,4 +1,4 @@
-import { Ship } from "./index";
+import { Ship } from "./ships";
 
 export class Gameboard {
   constructor() {
@@ -12,18 +12,18 @@ export class Gameboard {
   board = Array.from({ length: 10 }, () => new Array(10).fill(null));
 
   placeShip(type, x, y) {
+    const enoughSpace = (type, x, y) => {
+      for (let i = 0; i <= type.length - 1; i++) {
+        if (this.board[x][y + i] !== null) return false;
+      }
+      return true;
+    };
 
-    const enoughSpace = (type,x,y) => {for (let i = 0; i <= type.length - 1; i++) {; 
-    if(this.board[x][y + i] !== null) return false;
-  }return true;
-  }
-
-  if (enoughSpace(type,x,y)) {
-
-    for (let i = 0; i <= type.length - 1; i++) {
-      this.board[x][y + i] = type;
-    }}
-    else return "error"
+    if (enoughSpace(type, x, y)) {
+      for (let i = 0; i <= type.length - 1; i++) {
+        this.board[x][y + i] = type;
+      }
+    } else return "error";
   }
 
   receiveAttack(x, y) {
@@ -46,6 +46,7 @@ export class Gameboard {
   }
 }
 
-module.exports = {
+/*module.exports = {
   Gameboard,
 };
+*/

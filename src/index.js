@@ -1,18 +1,21 @@
+import { Player } from "./player";
 import { Gameboard } from "./gameBoard";
+import { generateBoard } from "./dom";
+const player1 = new Player();
+const player2 = new Player();
 
-export class Ship {
-  constructor(length) {
-    this.length = length;
-    this.sunk = false;
-    this.hitIndex = 0;
-  }
-  hit() {
-    this.hitIndex++;
-    this.isSunk();
-  }
-  isSunk() {
-    if (this.hitIndex == this.length) this.sunk = true;
-  }
-}
+player1.board.placeShip(player1.board.carrier, 0, 0);
+player1.board.placeShip(player1.board.battleship, 1, 0);
+player1.board.placeShip(player1.board.destroyer, 2, 0);
+player1.board.placeShip(player1.board.submarine, 3, 0);
+player1.board.placeShip(player1.board.patrolBoat, 4, 0);
 
-module.exports = { Ship };
+player2.board.placeShip(player1.board.carrier, 0, 1);
+player2.board.placeShip(player1.board.battleship, 1, 1);
+player2.board.placeShip(player1.board.destroyer, 2, 3);
+player2.board.placeShip(player1.board.submarine, 3, 4);
+player2.board.placeShip(player1.board.patrolBoat, 4, 2);
+
+generateBoard(player1);
+generateBoard(player2);
+
