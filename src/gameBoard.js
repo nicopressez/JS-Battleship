@@ -12,11 +12,20 @@ export class Gameboard {
   board = Array.from({ length: 10 }, () => new Array(10).fill(null));
 
   placeShip(type, x, y) {
-    if (this.board[x][y] === null && (y.length -1) - y >= type.length)
+
+    const enoughSpace = (type,x,y) => {for (let i = 0; i <= type.length - 1; i++) {; 
+    if(this.board[x][y + i] !== null) return false;
+  }return true;
+  }
+
+  if (enoughSpace(type,x,y)) {
+
     for (let i = 0; i <= type.length - 1; i++) {
       this.board[x][y + i] = type;
-    }
+    }}
+    else return "error"
   }
+
   receiveAttack(x, y) {
     if (this.board[x][y] === null) this.board[x][y] = "miss";
     else {

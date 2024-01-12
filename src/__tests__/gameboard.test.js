@@ -23,8 +23,8 @@ describe("Gameboard functions tests", () => {
     expect(testBoard.board[1][6]).toBe(testBoard.battleship);
     expect(testBoard.board[2][4]).toBe(testBoard.submarine);
   });
-  test("Boats are not placed if there is not enough space left", () =>{
-    expect(testBoard.placeShip(testBoard.submarine, 0, 9)).toBe("error");
+  test("Ships are not placed if there is not enough space left", () =>{
+    expect(testBoard.placeShip(testBoard.submarine, 0, 8)).toBe("error");
   })
   test("Gameboard hits based on coordinates and array changes", () => {
     testBoard.receiveAttack(0, 2);
