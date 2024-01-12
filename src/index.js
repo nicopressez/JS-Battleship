@@ -18,4 +18,3 @@ player2.board.placeShip(player2.board.patrolBoat, 4, 2);
 
 generateBoard(player1);
 generateBoard(player2);
-
