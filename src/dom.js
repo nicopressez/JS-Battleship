@@ -1,9 +1,9 @@
-import { GameBoard } from "./gameBoard";
-import { Player } from "./player";
-import { Ship } from "./ships";
 import { player1, player2 } from "./index";
+import { gameCheck } from "./game";
 
 let isPlayerTurn = true
+let gameOver = false;
+
 export const generateBoard = (player) => {
   // Generate 10x10 grid
   const body = document.querySelector("body");
@@ -36,10 +36,13 @@ const attackListener = (cell) => {
     "click",
     () => {
         
-        if (!isPlayerTurn) return;
+        const x = Number(cell.getAttribute("class").charAt(0));
+        const y = Number(cell.getAttribute("class").charAt(1));
 
-      const x = Number(cell.getAttribute("class").charAt(0));
-      const y = Number(cell.getAttribute("class").charAt(1));
+        if (!isPlayerTurn) return;
+        if (gameOver) return;
+        if (player2.board.board[x][y] === "hit" ||
+        player2.board.board[x][y] === "miss" ) return;
       // If this is a ship, add class "ship" to the grid
       if (player2.board.board[x][y] !== null) {
         cell.classList.add("ship");
@@ -49,14 +52,16 @@ const attackListener = (cell) => {
 
       player1.playTurn(player2, x, y);
       isPlayerTurn = false;
+      gameOver = gameCheck(player2, player1);
       // Computer will play after 3s
+      if (!gameOver){
       setTimeout(() => {
         computerPlays()
-        isPlayerTurn = true;}, 
+        isPlayerTurn = true;
+        gameOver = gameCheck(player1, player2);}, 
         300);
+      }
     },
-
-    { once: true },
   );
 };
 
@@ -77,3 +82,13 @@ const computerPlays = () => {
     attackedCell[0].classList.add("miss");
   }
 };
+
+export const endGameUI = (player) => {
+    const body = document.querySelector("body");
+    const announce = document.createElement("h1");
+
+    if (player.name === "player1")  announce.textContent = "You won!";
+    else announce.textContent = "You lost!";
+
+    body.appendChild(announce);
+}
