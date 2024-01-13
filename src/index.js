@@ -1,6 +1,7 @@
 import { Player } from "./player";
 import { Gameboard } from "./gameBoard";
-import { generateBoard, placeShipsGrid } from "./dom";
+import { generateBoard } from "./dom";
+import { placeShipsGrid } from "./preGameDOM";
 
 
 export const player1 = new Player("player1");
