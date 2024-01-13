@@ -29,10 +29,10 @@
   background-color: gray;
 }
 
-.gridContainer .isHit{
-    background-color: brown;
+.gridContainer .isHit {
+  background-color: brown;
 }
 
-.shipPlacement .gridContainer #mouseover{
+.shipPlacement .gridContainer #mouseover {
   background-color: lightcoral;
 }

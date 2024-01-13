@@ -1,7 +1,7 @@
 import { player1, player2, restartGame, startGame } from "./index";
 import { gameCheck } from "./index";
 
-let isPlayerTurn = true
+let isPlayerTurn = true;
 let gameOver = false;
 
 export const generateBoard = (player) => {
@@ -22,24 +22,30 @@ export const generateBoard = (player) => {
       gridContainer.appendChild(cell);
 
       if (player.name === "player1") {
-        if (player1.board.board[x][y] !== null) 
-        cell.classList.add("ship");
+        if (player1.board.board[x][y] !== null) cell.classList.add("ship");
       }
 
       // Add event listener only to the computer's grid
 
-      if (player.name === "player2") {attackListener(cell)
-      console.log("add listeners")};
+      if (player.name === "player2") {
+        attackListener(cell);
+        console.log("add listeners");
+      }
     }
   }
 };
 
 const attackHandler = (event) => {
+  const cell = event.target
   const x = Number(cell.getAttribute("class").charAt(0));
   const y = Number(cell.getAttribute("class").charAt(1));
   if (!isPlayerTurn) return;
   if (gameOver) return;
-  if (player2.board.board[x][y] === "hit" || player2.board.board[x][y] === "miss") return;
+  if (
+    player2.board.board[x][y] === "hit" ||
+    player2.board.board[x][y] === "miss"
+  )
+    return;
 
   if (player2.board.board[x][y] !== null) {
     cell.classList.add("ship");
@@ -61,7 +67,7 @@ const attackHandler = (event) => {
 };
 
 const attackListener = (cell) => {
-  cell.addEventListener('click', attackHandler);
+  cell.addEventListener("click", attackHandler);
 };
 
 const computerPlays = () => {
@@ -83,22 +89,23 @@ const computerPlays = () => {
 };
 
 export const endGameUI = (player) => {
-    const body = document.querySelector("body");
-    const announce = document.createElement("h1");
-    const restartBtn = document.createElement("button");
+  const body = document.querySelector("body");
+  const announce = document.createElement("h1");
+  const restartBtn = document.createElement("button");
 
-    if (player.name === "player1")  announce.textContent = "You won!";
-    else announce.textContent = "You lost!";
+  if (player.name === "player1") announce.textContent = "You won!";
+  else announce.textContent = "You lost!";
 
-    body.appendChild(announce);
-    body.appendChild(restartBtn);
-    restartBtn.textContent = "New game";
+  body.appendChild(announce);
+  body.appendChild(restartBtn);
+  restartBtn.textContent = "New game";
 
-    restartBtn.addEventListener("click", () => {
-      restartGame()
-      body.removeChild(announce);
-      body.removeChild(restartBtn)});
-}
+  restartBtn.addEventListener("click", () => {
+    restartGame();
+    body.removeChild(announce);
+    body.removeChild(restartBtn);
+  });
+};
 
 export const clearGrids = () => {
   removeEventListeners("player2");
@@ -109,13 +116,13 @@ export const clearGrids = () => {
 
   body.removeChild(grid1[0]);
   body.removeChild(grid2[0]);
-}
+};
 
 const removeEventListeners = (playerName) => {
   const cells = document.querySelectorAll(`.${playerName} .gridContainer div`);
 
-  cells.forEach(cell => {
-    cell.removeEventListener('click', attackHandler);
+  cells.forEach((cell) => {
+    cell.removeEventListener("click", attackHandler);
   });
 
   const clonedGrid = document.querySelector(`.${playerName}`);
