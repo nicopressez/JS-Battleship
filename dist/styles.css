@@ -1,15 +1,37 @@
 * {
+  font-family: 'Tektur', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body{
+  background-color: #5486b3;
+  color: white;
+  text-align: center;
+}
+
+.head{
+  background-color: #0c2562;
+  height: 15vh;
+  text-align: center;
+}
+
+.head .title{
+  padding-top: 2.2vh;
+  font-size: 4rem;
+  color: #b1b5be;
+}
+
 .gridContainer {
+  background-color: #b1b5be;
   display: inline-grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  margin-left: 20px;
+  margin-top: 50px;
   margin-bottom: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
   border: 4px solid black;
   width: 30rem;
   height: 30rem;
@@ -21,18 +43,42 @@
   border: 0.5px solid black;
 }
 
+.player2 div:hover{
+  background-color: red ;
+}
+
+.player2 div:active{
+  background-color: darkred;
+}
+
 .gridContainer .ship {
-  background-color: red;
+  background-color: #0c2562;
 }
 
 .gridContainer .miss {
-  background-color: gray;
+  background-color: #5486b3;
 }
 
 .gridContainer .isHit {
-  background-color: brown;
+  background-color: darkslategrey;
 }
 
 .shipPlacement .gridContainer #mouseover {
-  background-color: lightcoral;
+  background-color: #5486b3;
+}
+
+#placeShipsTitle {
+  margin-top: 50px;
+  font-size:  2.3rem;
+  color: black;
+}
+
+button{
+  width: 200px;
+  height: 50px;
+  font-size: 1.8rem;
+}
+
+body h1{
+  color: black;
 }
