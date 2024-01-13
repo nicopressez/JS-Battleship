@@ -1,8 +1,47 @@
 import { player1, player2 } from "./index";
-import { gameCheck } from "./game";
+import { gameCheck } from "./index";
 
 let isPlayerTurn = true
 let gameOver = false;
+
+export const placeShipsGrid = () => {
+  const shipPlacementContainer = document.getElementById("shipPlacement");
+   const placementGridContainer = document.createElement("section");
+  shipPlacementContainer.appendChild(placementGridContainer);
+  placementGridContainer.classList.add("gridContainer");
+  const currentShipName = document.getElementById("shipPlaced");
+  currentShipName.textContent = "Carrier"
+
+  // Generate an empty 10x10 grid for player to place their ships on
+  for (let x = 0; x <= 9; x++) {
+    for (let y = 0; y <= 9; y++) {
+      const cell = document.createElement("div");
+      cell.classList.add(`${x}${y}`);
+      placementGridContainer.appendChild(cell);
+      
+      placementListener(cell)
+
+      }
+
+}}
+
+export const placementListener = (cell) => {
+  cell.addEventListener('click', () => {
+
+const currentShipName = document.getElementById("shipPlaced");
+const x = Number(cell.getAttribute("class").charAt(0));
+const y = Number(cell.getAttribute("class").charAt(1));
+
+ if (currentShipName.textContent == "Carrier"){
+ if (player1.board.placeShip(player1.board.carrier, x, y))
+  {currentShipName.textContent = "Battleship";
+  console.log(x,y)
+  console.log (player1.board.board[x][y])}
+  else console.log("Can't place the ship here")
+ }
+
+  })
+}
 
 export const generateBoard = (player) => {
   // Generate 10x10 grid

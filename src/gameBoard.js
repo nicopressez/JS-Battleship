@@ -23,7 +23,8 @@ export class Gameboard {
       for (let i = 0; i <= type.length - 1; i++) {
         this.board[x][y + i] = type;
       }
-    } else return "error";
+      return true;
+    } else return false;
   }
 
   receiveAttack(x, y) {
