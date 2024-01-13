@@ -1,7 +1,23 @@
 import { player1, player2, startGame } from "./index";
 
 export const placeShipsGrid = () => {
-    const shipPlacementContainer = document.getElementById("shipPlacement");
+    const body = document.querySelector("body");
+    const shipPlacementContainer = document.createElement("section");
+    shipPlacementContainer.classList.add("shipPlacement");
+    shipPlacementContainer.setAttribute("id", "shipPlacement")
+
+    const shipPlacementTitle = document.createElement("h1");
+     shipPlacementTitle.setAttribute("id","placeShipsTitle");
+     shipPlacementTitle.textContent = "Place your ";
+
+    const actualShipName = document.createElement("span");
+    actualShipName.setAttribute("id", "shipPlaced");
+
+
+    body.appendChild(shipPlacementContainer);
+    shipPlacementContainer.appendChild(shipPlacementTitle);
+    shipPlacementTitle.appendChild(actualShipName)
+    
      const placementGridContainer = document.createElement("section");
     shipPlacementContainer.appendChild(placementGridContainer);
     placementGridContainer.classList.add("gridContainer");
@@ -139,11 +155,12 @@ export const placeShipsGrid = () => {
     const shipPlacementContainer = document.getElementById("shipPlacement");
     const startBtn = document.createElement("button");
     shipPlacementContainer.appendChild(startBtn);
+
   
     startBtn.textContent = "Start";
   
     startBtn.addEventListener('click', () => {
-      body.removeChild(shipPlacementContainer);
       startGame();
-    })
+      body.removeChild(shipPlacementContainer);
+    })   
   }

@@ -1,10 +1,10 @@
 import { Player } from "./player";
 import { endGameUI } from "./dom";
-import { generateBoard } from "./dom";
+import { generateBoard, clearGrids } from "./dom";
 import { placeShipsGrid } from "./preGameDOM";
 
-export const player1 = new Player("player1");
-export const player2 = new Player("player2");
+export let player1 = new Player("player1");
+export let player2 = new Player("player2");
 
 export const gameCheck = (otherPlayer, player) =>{
     if (otherPlayer.board.allSunk()) {
@@ -18,6 +18,16 @@ export const startGame = () => {
 randomizeComputerShips();
 generateBoard(player1);
 generateBoard(player2);
+console.log(player2.board)
+}
+
+export const restartGame = () => {
+    player1 = new Player("player1");
+    player2 = new Player("player2");
+    
+    clearGrids();
+    placeShipsGrid();
+    
 }
 
 const randomizeComputerShips = () => {
