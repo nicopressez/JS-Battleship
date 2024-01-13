@@ -20,6 +20,7 @@ export const placeShipsGrid = () => {
       placementGridContainer.appendChild(cell);
       
       placementListener(cell);
+      mouseOverListener(cell);
 
       }
 
@@ -77,6 +78,47 @@ const y = Number(cell.getAttribute("class").charAt(1));
         }
       
   })
+}
+
+export const mouseOverListener = (cell) => {
+  const currentShipName = document.getElementById("shipPlaced");
+  let currentCellClass = cell.classList.value;
+  let shipLength;
+
+  // Adjust shipLength based on current ship to place
+  if (currentShipName.textContent === "Carrier") shipLength = 5;
+  if (currentShipName.textContent === "Battleship") shipLength = 4;
+  if (currentShipName.textContent === "Destroyer") shipLength = 3;
+  if (currentShipName.textContent === "Submarine") shipLength = 3;
+  if (currentShipName.textContent === "Patrol Boat") shipLength = 2;
+
+
+  cell.addEventListener('mouseover', () => {
+    // If the ship ends on the next row of cells, don't add preview
+    let lastCellValue = +cell.classList.value +shipLength;
+    if (lastCellValue.toString().charAt(0) !== currentCellClass.toString().charAt(0)) return;
+
+    // Add the preview of the new ship on hover
+    for (let i = 0; i < shipLength; i++) {
+      let newCellClass = +currentCellClass + i;
+      // If the number is between 0 and 9, add a first 0
+      if (newCellClass < 10) newCellClass = "0" + newCellClass
+      const thisCell = document.getElementsByClassName(`${newCellClass}`);
+      thisCell[0].setAttribute("id", "mouseover");
+      
+    }})
+
+  cell.addEventListener('mouseout', () => {
+    for (let i = 0; i < shipLength; i++) {
+      let newCellClass = +currentCellClass + i;
+      // If the number is between 0 and 9, add a first 0
+      if (newCellClass < 10) newCellClass = "0" + newCellClass
+      const thisCell = document.getElementsByClassName(`${newCellClass}`);
+      thisCell[0].removeAttribute("id", "mouseover");
+      
+    }
+  }
+  )
 }
 
 export const showNewShip = (cell,ship) => {

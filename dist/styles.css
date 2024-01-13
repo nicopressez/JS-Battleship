@@ -32,3 +32,7 @@
 .gridContainer .isHit{
     background-color: brown;
 }
+
+.shipPlacement .gridContainer #mouseover{
+  background-color: lightcoral;
+}
