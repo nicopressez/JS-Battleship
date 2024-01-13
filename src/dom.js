@@ -29,6 +29,7 @@ export const placementListener = (cell) => {
   cell.addEventListener('click', () => {
 
 const currentShipName = document.getElementById("shipPlaced");
+const placementTitle = document.getElementById("placeShipsTitle")
 const x = Number(cell.getAttribute("class").charAt(0));
 const y = Number(cell.getAttribute("class").charAt(1));
 
@@ -36,10 +37,49 @@ const y = Number(cell.getAttribute("class").charAt(1));
  if (player1.board.placeShip(player1.board.carrier, x, y))
   {currentShipName.textContent = "Battleship";
   console.log(x,y)
-  console.log (player1.board.board[x][y])}
+  console.log (player1.board.board[x][y]);
+}
   else console.log("Can't place the ship here")
- }
+}
+ 
+ else if (currentShipName.textContent == "Battleship"){
+  if (player1.board.placeShip(player1.board.battleship, x, y))
+   {currentShipName.textContent = "Destroyer";
+   console.log(x,y)
+   console.log (player1.board.board[x][y]);
+  }
+   else console.log("Can't place the ship here")
+  }
+  
+  else if (currentShipName.textContent == "Destroyer"){
+    if (player1.board.placeShip(player1.board.destroyer, x, y))
+     {currentShipName.textContent = "Submarine";
+     console.log(x,y)
+     console.log (player1.board.board[x][y]);
+    }
+     else console.log("Can't place the ship here")
+    }
 
+    else if (currentShipName.textContent == "Submarine"){
+      if (player1.board.placeShip(player1.board.submarine, x, y))
+       {currentShipName.textContent = "Patrol Boat";
+       console.log(x,y)
+       console.log (player1.board.board[x][y]);
+      }
+       else console.log("Can't place the ship here")
+      }
+
+      else if (currentShipName.textContent == "Patrol Boat"){
+        if (player1.board.placeShip(player1.board.patrolBoat, x, y))
+         {
+         currentShipName.textContent = "";
+         placementTitle.textContent= "Click on start to play the game!"
+         console.log(x,y)
+         console.log (player1.board.board[x][y]);
+        }
+         else console.log("Can't place the ship here")
+        }
+      
   })
 }
 
