@@ -15,7 +15,7 @@ export const gameCheck = (otherPlayer, player) =>{
     else return false;
 }
 
-//export const startGame = () => {
+export const startGame = () => {
 
 
 player2.board.placeShip(player2.board.carrier, 0, 1);
@@ -24,9 +24,8 @@ player2.board.placeShip(player2.board.destroyer, 2, 3);
 player2.board.placeShip(player2.board.submarine, 3, 4);
 player2.board.placeShip(player2.board.patrolBoat, 4, 2);
 
-//generateBoard(player1);
-//generateBoard(player2);
-//}
+generateBoard(player1);
+generateBoard(player2);
+}
 
 placeShipsGrid();
-//startGame();*/
